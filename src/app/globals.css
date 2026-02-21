@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+}
+
+.scrollbar-none {
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+#yt-player iframe {
+  width: 100% !important;
+  height: 100% !important;
+  pointer-events: none;
+}
+
+#yt-player {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+#yt-player iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 177.78vh;
+  min-height: 56.25vw;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: white;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.group\/slider:hover input[type="range"]::-webkit-slider-thumb {
+  opacity: 1;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: white;
+  border: none;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.group\/slider:hover input[type="range"]::-moz-range-thumb {
+  opacity: 1;
+}
