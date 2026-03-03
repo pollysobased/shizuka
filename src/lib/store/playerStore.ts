@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 import type { Video, ActiveFilters } from "@/types";
 
 interface PlayerStore {
@@ -39,7 +40,8 @@ const emptyFilters: ActiveFilters = {
 };
 
 export const usePlayerStore = create<PlayerStore>()(
-  (set, get) => ({
+  persist(
+    (set, get) => ({
       currentIndex: 0,
       isPlaying: true,
       playlist: [],
@@ -105,5 +107,10 @@ export const usePlayerStore = create<PlayerStore>()(
       },
 
       setSidebarOpen: (open) => set({ sidebarOpen: open }),
-  })
+    }),
+    {
+      name: "shizuka-state",
+      partialize: (s) => ({ isMuted: s.isMuted, volume: s.volume, filters: s.filters }),
+    }
+  )
 );
