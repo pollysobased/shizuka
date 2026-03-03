@@ -38,6 +38,9 @@ export function YouTubePlayer() {
       readyRef.current = false;
     }
 
+    // origin param helps suppress some yt ui overlays
+    const origin = typeof window !== "undefined" ? window.location.origin : "";
+
     playerRef.current = new window.YT.Player(containerRef.current, {
       videoId: currentVideo.id,
       playerVars: {
@@ -51,6 +54,7 @@ export function YouTubePlayer() {
         playsinline: 1,
         showinfo: 0,
         cc_load_policy: 0,
+        origin,
       },
       events: {
         onReady: (e: { target: YouTubePlayer }) => {
