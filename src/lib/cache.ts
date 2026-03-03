@@ -1,6 +1,6 @@
 import type { Video } from "@/types";
 
-const CACHE_KEY = "shizuka-video-cache";
+const CACHE_KEY = "shizuka-videos-cache";
 const CACHE_TTL = 1000 * 60 * 60 * 24; // 24 hours
 
 interface CacheEntry {
