@@ -30,7 +30,12 @@ export function filterVideos(videos: Video[], filters: ActiveFilters): Video[] {
 
   if (filters.prefecture.length > 0) {
     results = results.filter((v) =>
-      filters.prefecture.some((p) => v.tags.prefecture.includes(p))
+      filters.prefecture.some(
+        (p) =>
+          v.tags.prefecture.includes(p) ||
+          v.tags.locations.includes(p) ||
+          v.title.toLowerCase().includes(p)
+      )
     );
   }
 
