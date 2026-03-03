@@ -113,7 +113,14 @@ export function Sidebar({ open }: SidebarProps) {
             <div className="flex items-center justify-between px-4 pt-4 pb-3">
               <span className="text-white/50 text-xs">filters</span>
               <div className="flex items-center gap-3">
-
+                {hasFilters && (
+                  <button
+                    onClick={clearFilters}
+                    className="text-white/30 text-xs hover:text-white/60 transition-colors"
+                  >
+                    clear
+                  </button>
+                )}
                 <button
                   onClick={() => setSidebarOpen(false)}
                   className="text-white/30 hover:text-white/60 transition-colors"
