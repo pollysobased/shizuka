@@ -15,7 +15,7 @@ export function Scene() {
   const { isLoading } = useVideos();
   const { playlist, sidebarOpen } = usePlayerStore();
   const [uiVisible, setUiVisible] = useState(true);
-  const hideTimer = useRef<ReturnType<typeof setTimeout>>();
+  const hideTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const showUI = useCallback(() => {
     setUiVisible(true);
