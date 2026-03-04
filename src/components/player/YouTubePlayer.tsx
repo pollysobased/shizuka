@@ -5,7 +5,7 @@ import { usePlayerStore } from "@/lib/store/playerStore";
 
 declare global {
   interface Window {
-    YT: typeof YT;
+    YT: any;
     onYouTubeIframeAPIReady: () => void;
   }
 }
