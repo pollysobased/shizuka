@@ -1,10 +1,18 @@
-# shizuka
+<div align="center">
+    <img src="https://raw.githubusercontent.com/pollysobased/shizuka/main/docs/images/shizuka-icon.svg" width="72" height="auto" alt="shizuka icon"/>
+</div>
+
+<hr />
 
 ambient japan street walks for coding and relaxing.
 
 ## what it is
 
 shizuka plays rambalac's japan walking videos as a continuous ambient backdrop. filter by weather, time, season, environment, and prefecture. use vibe presets for quick vibes.
+
+## screenshots
+![screenshot-01](docs/images/sh-screenshot-01.jpg)
+![screenshot-02](docs/images/sh-screenshot-02.jpg)
 
 ## setup
 
