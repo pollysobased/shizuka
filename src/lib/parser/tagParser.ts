@@ -186,6 +186,11 @@ function dedupe<T>(arr: T[]): T[] {
   return [...new Set(arr)];
 }
 
+function matches(text: string, keyword: string): boolean {
+  const escaped = keyword.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  return new RegExp(`\\b${escaped}\\b`, "i").test(text);
+}
+
 export function parseVideoTags(title: string, description = ""): VideoTags {
   const text = `${title} ${description}`.toLowerCase();
 
@@ -197,27 +202,27 @@ export function parseVideoTags(title: string, description = ""): VideoTags {
   const locations: string[] = [];
 
   for (const [keyword, value] of Object.entries(weatherKeywords)) {
-    if (text.includes(keyword)) weather.push(value);
+    if (matches(text, keyword)) weather.push(value);
   }
 
   for (const [keyword, value] of Object.entries(timeKeywords)) {
-    if (text.includes(keyword)) time.push(value);
+    if (matches(text, keyword)) time.push(value);
   }
 
   for (const [keyword, value] of Object.entries(seasonKeywords)) {
-    if (text.includes(keyword)) season.push(value);
+    if (matches(text, keyword)) season.push(value);
   }
 
   for (const [keyword, value] of Object.entries(environmentKeywords)) {
-    if (text.includes(keyword)) environment.push(value);
+    if (matches(text, keyword)) environment.push(value);
   }
 
   for (const pref of prefectureList) {
-    if (text.includes(pref)) prefecture.push(pref);
+    if (matches(text, pref)) prefecture.push(pref);
   }
 
   for (const [keyword, value] of Object.entries(locationKeywords)) {
-    if (text.includes(keyword)) locations.push(value);
+    if (matches(text, keyword)) locations.push(value);
   }
 
   return {
