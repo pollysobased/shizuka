@@ -1,5 +1,6 @@
 "use client";
 
+import { useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePlayerStore } from "@/lib/store/playerStore";
 import { cn } from "@/lib/cn";
@@ -69,22 +70,30 @@ function VolumeHighIcon() {
 
 function VolumeSlider({ volume, isMuted, onChange }: { volume: number; isMuted: boolean; onChange: (v: number) => void }) {
   const effective = isMuted ? 0 : volume;
+  const trackRef = useRef<HTMLDivElement>(null);
+
+  const handlePointer = (e: React.PointerEvent) => {
+    if (!trackRef.current) return;
+    
+    const rect = trackRef.current.getBoundingClientRect();
+    const x = Math.max(0, Math.min(e.clientX - rect.left, rect.width));
+
+    onChange(Math.round((x / rect.width) * 100));
+  };
+
   return (
-    <div className="relative flex items-center w-20 h-4 group/slider">
+    <div
+      ref={trackRef}
+      className="relative flex items-center w-20 h-4 cursor-pointer group/slider"
+      onPointerDown={(e) => { e.currentTarget.setPointerCapture(e.pointerId); handlePointer(e); }}
+      onPointerMove={(e) => { if (e.buttons === 1) handlePointer(e); }}
+    >
       <div className="w-full h-0.5 rounded-full bg-white/10 relative overflow-hidden">
         <div
           className="absolute left-0 top-0 h-full bg-white/50 rounded-full transition-all duration-100"
           style={{ width: `${effective}%` }}
         />
       </div>
-      <input
-        type="range"
-        min={0}
-        max={100}
-        value={effective}
-        onChange={(e) => onChange(Number(e.target.value))}
-        className="absolute inset-0 w-full opacity-0 cursor-pointer h-full"
-      />
     </div>
   );
 }
