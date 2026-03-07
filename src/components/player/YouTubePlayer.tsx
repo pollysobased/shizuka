@@ -67,10 +67,11 @@ export function YouTubePlayer() {
           }
           e.target.playVideo();
         },
-        onStateChange: (e: { data: number }) => {
+        onStateChange: (e: { data: number, target: YouTubePlayer }) => {
           if (e.data === 0) skipNext();
           if (e.data === 1) setPlaying(true);
-          if (e.data === 2) setPlaying(false);
+          if (e.data === 2 && readyRef.current) setPlaying(false);
+          if (e.data === 3) e.target.playVideo();
         },
       },
     } as never) as YouTubePlayer;
